@@ -198,8 +198,7 @@ class OrderPoint(ModelSQL, ModelView):
         ids = []
         for type, field in cls._type2field().iteritems():
             args = [('type', '=', type)]
-            for _, operator, operand in domain:
-                args.append((field, operator, operand))
+            args.append((field, domain[1], domain[2]))
             ids.extend([o.id for o in cls.search(args)])
         return [('id', 'in', ids)]
 
